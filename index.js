@@ -47,5 +47,5 @@ document.getElementById("registrationForm").addEventListener("submit", function 
   localStorage.setItem("userEntries", JSON.stringify(entries));
 
   loadEntries();
-  this.reset();
+  this.reset(); // optional: clear the form after submission
 });
