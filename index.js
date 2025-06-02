@@ -66,9 +66,10 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   
   function validateAge(dob) {
-    const birthDate = new Date(dob);
-    const today = new Date();
-    const age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    return (age > 18 || (age === 18 && m >= 0)) && (age < 55 || (age === 55 && m <= 0));
-  }
+  const birthDate = new Date(dob);
+  const today = new Date();
+  const ageDiff = today - birthDate;
+  const ageDate = new Date(ageDiff); // miliseconds from epoch
+  const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  return age >= 18 && age <= 55;
+}
