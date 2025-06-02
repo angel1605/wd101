@@ -64,12 +64,15 @@ window.addEventListener("DOMContentLoaded", () => {
     const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     return pattern.test(email.toLowerCase());
   }
-  
   function validateAge(dob) {
   const birthDate = new Date(dob);
   const today = new Date();
-  const ageDiff = today - birthDate;
-  const ageDate = new Date(ageDiff); // miliseconds from epoch
-  const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  const dayDiff = today.getDate() - birthDate.getDate();
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--; // Birthday hasn't occurred yet this year
+  }
   return age >= 18 && age <= 55;
 }
+
